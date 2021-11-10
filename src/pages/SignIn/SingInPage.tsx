@@ -16,7 +16,10 @@ export default function SingInPage() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    User_API.signInUser(form);
+    User_API.signInUser(form).then((res) => {
+      window.history.pushState({}, "", "/");
+      window.location.reload();
+    });
   };
 
   return (
@@ -37,7 +40,7 @@ export default function SingInPage() {
           onChange={updateForm}
           value={form.password}
         />
-         <br />
+        <br />
         <button type="submit">Submit</button>
       </form>
     </div>

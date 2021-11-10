@@ -46,12 +46,12 @@ export async function welcomeUser() {
 }
 
 export async function verificationUser() {
-  const PATH = "/user/verification";
+  const PATH = "/user/verification/" + window.location.pathname.split("/")[3];
 
   try {
     const res = await apiInstance.get(PATH, {
       headers: {
-        Authorization: window.localStorage.getItem("Token") || "",
+        Authorization: window.location.pathname.split("/")[2] || "",
       },
     });
     const apiRes: ApiRes = res.data;

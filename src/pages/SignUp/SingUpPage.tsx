@@ -17,7 +17,10 @@ export default function SingUpPage() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    User_API.signUpUser(form);
+    User_API.signUpUser(form).then((res) => {
+      window.history.pushState({}, "", "/verify");
+      window.location.reload();
+    });
   };
 
   return (
