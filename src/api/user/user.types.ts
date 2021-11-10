@@ -5,6 +5,6 @@ export type signUpData = {
 };
 
 export type signInData = {
-  email: string;
+  email?: string;
   password: string;
 };
