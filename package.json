@@ -1,5 +1,5 @@
 {
-  "name": "foo",
+  "name": "noteq",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -9,8 +9,8 @@
     "@types/jest": "^27.0.2",
     "@types/node": "^16.11.7",
     "@types/react": "^17.0.34",
-    "@types/react-dom": "^17.0.11",
     "autoprefixer": "10.x",
+    "axios": "^0.24.0",
     "cross-env": "7.x",
     "delay-cli": "^1.1.0",
     "npm-run-all": "4.x",
@@ -19,6 +19,8 @@
     "postcss-preset-env": "6.x",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-query": "^3.32.1",
+    "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
     "tailwindcss": "2.x",
     "typescript": "4.x"
@@ -47,5 +49,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react-dom": "^17.0.11"
   }
 }
