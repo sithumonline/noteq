@@ -6,6 +6,7 @@ export default function HomePage() {
     User_API.welcomeUser()
       .then((res) => {
           window.history.pushState({}, "", "/note/" + window.localStorage.getItem("UserId"));
+          window.location.reload();
       })
       .catch((e) => {
         window.history.pushState({}, "", "/signin");
