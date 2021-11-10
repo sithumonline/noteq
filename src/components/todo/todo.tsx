@@ -1,8 +1,11 @@
 import { useState } from "react";
+import { useMutation, useQueryClient } from "react-query";
 import { Note_API } from "../../api/note";
 import { noteData } from "../../api/note/note.types";
 
 export default function Todo(tn: noteData) {
+  const queryClient = useQueryClient();
+
   const [form, setForm] = useState({
     note: tn.note,
   });
@@ -14,30 +17,38 @@ export default function Todo(tn: noteData) {
     });
   };
 
-  const handleCreate = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    e.preventDefault();
-    Note_API.create({note: form.note, userId: window.location.pathname.split("/")[2]});
-  };
+  const handleCreate = useMutation(Note_API.create, {
+    onSuccess: () => {
+      setForm({
+        note: "",
+      });
+      queryClient.invalidateQueries("todos");
+    },
+  });
 
-  const handleUpdate = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    e.preventDefault();
-    Note_API.update({ note: form.note, ID: tn.ID });
-  };
+  const handleUpdate = useMutation(Note_API.update, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("todos");
+    },
+  });
 
-  const handleDelete = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    e.preventDefault();
-    Note_API.remove(tn.ID || "");
-  };
+  const handleDelete = useMutation(Note_API.remove, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("todos");
+    },
+  });
 
-  const handlePublic = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    e.preventDefault();
-    Note_API.update({ public: true, ID: tn.ID });
-  };
+  const handlePublic = useMutation(Note_API.update, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("todos");
+    },
+  });
 
-  const handleDone = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    e.preventDefault();
-    Note_API.update({ complete: true, ID: tn.ID });
-  };
+  const handleDone = useMutation(Note_API.update, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("todos");
+    },
+  });
 
   return (
     <div>
@@ -45,19 +56,40 @@ export default function Todo(tn: noteData) {
       <input type="note" name="note" onChange={updateForm} value={form.note} />
       <br />
       {tn.CreatedAt ? null : (
-        <button onClick={(e) => handleCreate(e)}>Create</button>
+        <button
+          onClick={() =>
+            handleCreate.mutate({
+              note: form.note,
+              userId: window.location.pathname.split("/")[2],
+            })
+          }
+        >
+          Create
+        </button>
       )}
       {tn.CreatedAt ? (
-        <button onClick={(e) => handleUpdate(e)}>Update</button>
+        <button
+          onClick={() => handleUpdate.mutate({ note: form.note, ID: tn.ID })}
+        >
+          Update
+        </button>
       ) : null}
       {tn.CreatedAt ? (
-        <button onClick={(e) => handleDelete(e)}>Delete</button>
+        <button onClick={() => handleDelete.mutate(tn.ID || "")}>Delete</button>
       ) : null}
       {tn.CreatedAt ? (
-        <button onClick={(e) => handlePublic(e)}>Public</button>
+        <button
+          onClick={() => handlePublic.mutate({ public: true, ID: tn.ID })}
+        >
+          Public
+        </button>
       ) : null}
       {tn.CreatedAt && !tn.complete ? (
-        <button onClick={(e) => handleDone(e)}>Done</button>
+        <button
+          onClick={() => handleDone.mutate({ complete: true, ID: tn.ID })}
+        >
+          Done
+        </button>
       ) : null}
     </div>
   );
