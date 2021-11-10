@@ -1,10 +1,10 @@
 import { useQuery } from "react-query";
 import { Note_API } from "../../api/note";
 
-export default function NotePage() {
+export default function NotesPage() {
   const { isLoading, isError, isSuccess, data, error } = useQuery(
-    "todo",
-    Note_API.getNote
+    "todos",
+    Note_API.getNotes
   );
 
   if (isLoading)
@@ -23,32 +23,19 @@ export default function NotePage() {
 
   if (isSuccess && data) {
     const nt = data.data;
-    console.log(nt);
     if (nt instanceof Array) {
       return (
         <div>
           <header>
             <h1>Todos</h1>
             {nt.map((todo) => (
-              <div key={todo.ID}>
-                {todo.note} | {todo.ID}
-              </div>
+              <div key={todo.ID}>{todo.note} | {todo.ID}</div>
             ))}
-          </header>
-        </div>
-      );
-    } 
-    if (nt instanceof Object) {
-      return (
-        <div>
-          <header>
-            <h1>Todos</h1>
-            {nt.note} | {nt.ID}
           </header>
         </div>
       );
     }
   }
 
-  return <div>TodosPag</div>;
+  return <div>TodosPage</div>;
 }
