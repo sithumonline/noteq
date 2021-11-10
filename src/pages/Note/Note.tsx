@@ -23,7 +23,6 @@ export default function NotePage() {
 
   if (isSuccess && data) {
     const nt = data.data;
-    console.log(nt);
     if (nt instanceof Array) {
       return (
         <div>
