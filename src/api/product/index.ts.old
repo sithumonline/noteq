@@ -1,3 +1,0 @@
-import * as Product_API from "./product.request.ts.old";
-
-export { Product_API };

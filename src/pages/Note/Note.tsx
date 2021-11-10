@@ -26,24 +26,18 @@ export default function NotePage() {
     if (nt instanceof Array) {
       return (
         <div>
-          <header>
-            <h1>Todos</h1>
-            {nt.map((todo) => (
-              <div key={todo.ID}>
-                {todo.note} | {todo.ID}
-              </div>
-            ))}
-          </header>
+          {nt.map((todo) => (
+            <div key={todo.ID}>
+              {todo.note} | {todo.ID}
+            </div>
+          ))}
         </div>
       );
-    } 
+    }
     if (nt instanceof Object) {
       return (
         <div>
-          <header>
-            <h1>Todos</h1>
-            {nt.note} | {nt.ID}
-          </header>
+          {nt.note} | {nt.ID}
         </div>
       );
     }

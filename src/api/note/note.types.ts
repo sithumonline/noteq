@@ -1,5 +1,5 @@
 export type noteData = {
-  ID: string;
+  ID?: string;
   CreatedAt?: Date;
   note?: string;
   userId?: string;
