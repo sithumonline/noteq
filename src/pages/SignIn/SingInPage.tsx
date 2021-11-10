@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { User_API } from "../../api/user";
 
 export default function SingInPage() {
@@ -42,6 +43,8 @@ export default function SingInPage() {
         />
         <br />
         <button type="submit">Submit</button>
+        <Link to="/signup">Sign Up</Link>
+        <Link to="/forgotpassword">Forgot Password</Link>
       </form>
     </div>
   );

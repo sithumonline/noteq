@@ -1,5 +1,6 @@
 import { useQuery } from "react-query";
 import { Note_API } from "../../api/note";
+import Navbar from "../../components/common/Navbar/Navbar";
 import Todo from "../../components/todo/todo";
 
 export default function NotesPage() {
@@ -27,6 +28,7 @@ export default function NotesPage() {
     if (nt instanceof Array) {
       return (
         <div>
+          <Navbar />
           <Todo />
           {nt.map((todo) => (
             <Todo
