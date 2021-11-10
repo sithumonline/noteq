@@ -5,11 +5,18 @@ export default function HomePage() {
   useEffect(() => {
     User_API.welcomeUser()
       .then((res) => {
-          window.history.pushState({}, "", "/note/" + window.localStorage.getItem("UserId"));
+        if (res !== 200) {
+          window.history.pushState({}, "", "/signin");
+        } else {
+          window.history.pushState(
+            {},
+            "",
+            "/note/" + window.localStorage.getItem("UserId")
+          );
           window.location.reload();
+        }
       })
       .catch((e) => {
-        window.history.pushState({}, "", "/signin");
         console.error(e);
       });
   });

@@ -39,8 +39,7 @@ export async function welcomeUser() {
         Authorization: window.localStorage.getItem("Token") || "",
       },
     });
-    const apiRes: ApiRes = res.data;
-    return apiRes;
+    return res.status;
   } catch (e) {
     console.error(e);
   }
