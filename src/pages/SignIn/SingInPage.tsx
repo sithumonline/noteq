@@ -17,10 +17,7 @@ export default function SingInPage() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    User_API.signInUser(form).then((res) => {
-      window.history.pushState({}, "", "/");
-      window.location.reload();
-    });
+    User_API.signInUser(form);
   };
 
   return (

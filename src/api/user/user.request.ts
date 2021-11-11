@@ -30,6 +30,10 @@ export async function signInUser(requestData: signInData) {
         base64.decode(apiRes.data.split(";")[1])
       );
     }
+    if (res.status === 200) {
+      window.history.pushState({}, "", "/");
+      window.location.reload();
+    }
     return apiRes;
   } catch (e) {
     console.error(e);
