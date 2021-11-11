@@ -40,6 +40,7 @@ export default function Todo(tn: noteData) {
 
   const handlePublic = useMutation(Note_API.update, {
     onSuccess: () => {
+      window.open(`/note/${tn.userId}/${tn.ID}`, "_blank");
       queryClient.invalidateQueries("todos");
     },
   });
@@ -53,7 +54,7 @@ export default function Todo(tn: noteData) {
   return (
     <>
       <div className="xl:w-1/3 md:w-1/2 p-4">
-        <div className="border border-gray-200 p-6 rounded-lg">
+        <div className="border border-gray-200 bg-gray-100 p-6 rounded-lg">
           <input
             type="note"
             name="note"
@@ -67,10 +68,12 @@ export default function Todo(tn: noteData) {
               <button
                 className="py-2 px-4  bg-purple-500 hover:bg-purple-600 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg"
                 onClick={() =>
-                  handleCreate.mutate({
-                    note: form.note,
-                    userId: window.location.pathname.split("/")[2],
-                  })
+                  form.note == ""
+                    ? null
+                    : handleCreate.mutate({
+                        note: form.note,
+                        userId: window.location.pathname.split("/")[2],
+                      })
                 }
               >
                 Create
@@ -80,7 +83,9 @@ export default function Todo(tn: noteData) {
               <button
                 className="py-2 px-4  bg-purple-500 hover:bg-purple-600 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg"
                 onClick={() =>
-                  handleUpdate.mutate({ note: form.note, ID: tn.ID })
+                  form.note == ""
+                    ? null
+                    : handleUpdate.mutate({ note: form.note, ID: tn.ID })
                 }
               >
                 Update

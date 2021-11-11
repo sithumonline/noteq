@@ -22,11 +22,17 @@ export async function signInUser(requestData: signInData) {
     const res = await apiInstance.post(PATH, requestData);
     const apiRes: ApiRes = res.data;
     if (apiRes.data) {
+      window.localStorage.removeItem("Token");
+      window.localStorage.removeItem("UserId");
       window.localStorage.setItem("Token", apiRes.data.split(";")[0]);
       window.localStorage.setItem(
         "UserId",
         base64.decode(apiRes.data.split(";")[1])
       );
+    }
+    if (res.status === 200) {
+      window.history.pushState({}, "", "/");
+      window.location.reload();
     }
     return apiRes;
   } catch (e) {

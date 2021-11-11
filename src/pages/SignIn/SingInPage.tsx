@@ -17,10 +17,7 @@ export default function SingInPage() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    User_API.signInUser(form).then((res) => {
-      window.history.pushState({}, "", "/");
-      window.location.reload();
-    });
+    User_API.signInUser(form);
   };
 
   return (
@@ -60,17 +57,17 @@ export default function SingInPage() {
                 type="submit"
                 className="text-white bg-purple-500 border-0 py-2 px-6 focus:outline-none hover:bg-purple-600 rounded text-lg"
               >
-                Submit
+                Sign In
               </button>
               <Link
                 to="/signup"
-                className="ml-3 mt-3 text-purple-500 inline-flex items-center"
+                className="ml-3 mt-3 text-purple-500 hover:text-purple-600 inline-flex items-center"
               >
                 Sign Up
               </Link>
               <Link
                 to="/forgotpassword"
-                className="ml-3 mt-3 text-purple-500 inline-flex items-center"
+                className="ml-3 mt-3 text-purple-500 hover:text-purple-600 inline-flex items-center"
               >
                 Forgot Password
               </Link>
