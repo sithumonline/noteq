@@ -1,3 +1,4 @@
+import { toNamespacedPath } from "path/posix";
 import { useQuery } from "react-query";
 import { Note_API } from "../../api/note";
 
@@ -9,16 +10,32 @@ export default function NotePage() {
 
   if (isLoading)
     return (
-      <div>
-        <h1>isLoading...</h1>
-      </div>
+      <>
+        <section className="text-gray-600 body-font">
+          <div className="container px-5 py-24 mx-auto">
+            <div className="flex flex-wrap -m-4">
+              <h1 className="text-2xl font-medium title-font mb-4 text-gray-900 tracking-widest">
+                Loading...
+              </h1>
+            </div>
+          </div>
+        </section>
+      </>
     );
 
   if (isError)
     return (
-      <div>
-        <h1>{!error}</h1>
-      </div>
+      <>
+        <section className="text-gray-600 body-font">
+          <div className="container px-5 py-24 mx-auto">
+            <div className="flex flex-wrap -m-4">
+              <h1 className="text-2xl font-medium title-font mb-4 text-gray-900 tracking-widest">
+                {!error}
+              </h1>
+            </div>
+          </div>
+        </section>
+      </>
     );
 
   if (isSuccess && data) {
@@ -26,22 +43,48 @@ export default function NotePage() {
     if (nt instanceof Array) {
       return (
         <div>
-          {nt.map((todo) => (
-            <div key={todo.ID}>
-              {todo.note} | {todo.ID}
+          <section className="text-gray-600 body-font">
+            <div className="container px-5 py-24 mx-auto">
+              <div className="xl:w-1/2 lg:w-3/4 w-full mx-auto text-center">
+                {nt.map((todo) => (
+                  <p key={todo.ID} className="leading-relaxed text-lg">
+                    {todo.note}
+                  </p>
+                ))}
+              </div>
             </div>
-          ))}
+          </section>
         </div>
       );
     }
     if (nt instanceof Object) {
       return (
         <div>
-          {nt.note} | {nt.ID}
+          <section className="text-gray-600 body-font">
+            <div className="container px-5 py-24 mx-auto">
+              <div className="xl:w-1/2 lg:w-3/4 w-full mx-auto text-center">
+                <p className="leading-relaxed text-lg" key={nt.ID}>
+                  {nt.note}
+                </p>
+              </div>
+            </div>
+          </section>
         </div>
       );
     }
   }
 
-  return <div>TodosPag</div>;
+  return (
+    <>
+      <section className="text-gray-600 body-font">
+        <div className="container px-5 py-24 mx-auto">
+          <div className="flex flex-wrap -m-4">
+            <h1 className="text-2xl font-medium title-font mb-4 text-gray-900 tracking-widest">
+              Quick Note
+            </h1>
+          </div>
+        </div>
+      </section>
+    </>
+  );
 }

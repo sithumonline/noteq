@@ -51,46 +51,68 @@ export default function Todo(tn: noteData) {
   });
 
   return (
-    <div>
-      {tn.ID} <br />
-      <input type="note" name="note" onChange={updateForm} value={form.note} />
-      <br />
-      {tn.CreatedAt ? null : (
-        <button
-          onClick={() =>
-            handleCreate.mutate({
-              note: form.note,
-              userId: window.location.pathname.split("/")[2],
-            })
-          }
-        >
-          Create
-        </button>
-      )}
-      {tn.CreatedAt ? (
-        <button
-          onClick={() => handleUpdate.mutate({ note: form.note, ID: tn.ID })}
-        >
-          Update
-        </button>
-      ) : null}
-      {tn.CreatedAt ? (
-        <button onClick={() => handleDelete.mutate(tn.ID || "")}>Delete</button>
-      ) : null}
-      {tn.CreatedAt && !tn.public ? (
-        <button
-          onClick={() => handlePublic.mutate({ public: true, ID: tn.ID })}
-        >
-          Public
-        </button>
-      ) : null}
-      {tn.CreatedAt && !tn.complete ? (
-        <button
-          onClick={() => handleDone.mutate({ complete: true, ID: tn.ID })}
-        >
-          Done
-        </button>
-      ) : null}
-    </div>
+    <>
+      <div className="xl:w-1/3 md:w-1/2 p-4">
+        <div className="border border-gray-200 p-6 rounded-lg">
+          <input
+            type="note"
+            name="note"
+            onChange={updateForm}
+            value={form.note}
+            className="w-full bg-white rounded border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+          />
+          <br />
+          <div className="flex items-center justify-between gap-4 w-full mt-8">
+            {tn.CreatedAt ? null : (
+              <button
+                className="py-2 px-4  bg-purple-500 hover:bg-purple-600 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg"
+                onClick={() =>
+                  handleCreate.mutate({
+                    note: form.note,
+                    userId: window.location.pathname.split("/")[2],
+                  })
+                }
+              >
+                Create
+              </button>
+            )}
+            {tn.CreatedAt ? (
+              <button
+                className="py-2 px-4  bg-purple-500 hover:bg-purple-600 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg"
+                onClick={() =>
+                  handleUpdate.mutate({ note: form.note, ID: tn.ID })
+                }
+              >
+                Update
+              </button>
+            ) : null}
+            {tn.CreatedAt ? (
+              <button
+                className="py-2 px-4  bg-purple-500 hover:bg-purple-600 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg"
+                onClick={() => handleDelete.mutate(tn.ID || "")}
+              >
+                Delete
+              </button>
+            ) : null}
+            {tn.CreatedAt && !tn.public ? (
+              <button
+                className="py-2 px-4  bg-purple-500 hover:bg-purple-600 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg"
+                onClick={() => handlePublic.mutate({ public: true, ID: tn.ID })}
+              >
+                Public
+              </button>
+            ) : null}
+            {tn.CreatedAt && !tn.complete ? (
+              <button
+                className="py-2 px-4  bg-purple-500 hover:bg-purple-600 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg"
+                onClick={() => handleDone.mutate({ complete: true, ID: tn.ID })}
+              >
+                Done
+              </button>
+            ) : null}
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
