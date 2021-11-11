@@ -40,6 +40,7 @@ export default function Todo(tn: noteData) {
 
   const handlePublic = useMutation(Note_API.update, {
     onSuccess: () => {
+      window.open(`/note/${tn.userId}/${tn.ID}`, "_blank");
       queryClient.invalidateQueries("todos");
     },
   });
