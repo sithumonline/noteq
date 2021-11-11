@@ -64,13 +64,13 @@ export default function SingInPage() {
               </button>
               <Link
                 to="/signup"
-                className="ml-3 mt-3 text-purple-500 inline-flex items-center"
+                className="ml-3 mt-3 text-purple-500 hover:text-purple-600 inline-flex items-center"
               >
                 Sign Up
               </Link>
               <Link
                 to="/forgotpassword"
-                className="ml-3 mt-3 text-purple-500 inline-flex items-center"
+                className="ml-3 mt-3 text-purple-500 hover:text-purple-600 inline-flex items-center"
               >
                 Forgot Password
               </Link>

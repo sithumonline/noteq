@@ -53,7 +53,7 @@ export default function Todo(tn: noteData) {
   return (
     <>
       <div className="xl:w-1/3 md:w-1/2 p-4">
-        <div className="border border-gray-200 p-6 rounded-lg">
+        <div className="border border-gray-200 bg-gray-100 p-6 rounded-lg">
           <input
             type="note"
             name="note"
