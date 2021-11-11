@@ -77,7 +77,7 @@ export default function Todo(tn: noteData) {
       {tn.CreatedAt ? (
         <button onClick={() => handleDelete.mutate(tn.ID || "")}>Delete</button>
       ) : null}
-      {tn.CreatedAt ? (
+      {tn.CreatedAt && !tn.public ? (
         <button
           onClick={() => handlePublic.mutate({ public: true, ID: tn.ID })}
         >
