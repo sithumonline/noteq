@@ -7,6 +7,7 @@ export default function HomePage() {
       .then((res) => {
         if (res !== 200) {
           window.history.pushState({}, "", "/signin");
+          window.location.reload();
         } else {
           window.history.pushState(
             {},
