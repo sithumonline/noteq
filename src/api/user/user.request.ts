@@ -22,6 +22,8 @@ export async function signInUser(requestData: signInData) {
     const res = await apiInstance.post(PATH, requestData);
     const apiRes: ApiRes = res.data;
     if (apiRes.data) {
+      window.localStorage.removeItem("Token");
+      window.localStorage.removeItem("UserId");
       window.localStorage.setItem("Token", apiRes.data.split(";")[0]);
       window.localStorage.setItem(
         "UserId",
